@@ -8,32 +8,21 @@ Our project tests out subject-driven imporvments in image editing though the use
 
 ## Project Setup Instructions
 
-#### 1. Clone the Repository
-Clone this repository to your local machine:
+#### 1. Clone the Repository to your local machine:
 
 ```bash
 git clone https://github.com/sreenidhi2002/CS598_LLM_for_Editing.git
 cd CS598_LLM_for_Editing
 ```
 
-#### 2. Setup instructions
+#### 2. Setup instructions for each model:
 
 - LLaMA-VID: The code for LLaMA-VID is available in the llama_vid directory. Ensure all necessary model weights and configurations are downloaded or set up as specified in the directory’s README or configuration files.
 
 - BLIP-Diffusion: The BLIP-Diffusion code is located in the blip_diffusion directory. The additional setup steps are listed within this directory to ensure the model can run correctly.
 
-
-### Running the Model
-Set Up BLIP-Diffusion: Ensure that the BLIP-Diffusion model is installed and configured. Run inference with a sample image and text prompt to observe initial editing results and identify failure cases.
-
-Alternative Embedding Model: Set up and integrate LLaMA-VID for generating embeddings compatible with BLIP-Diffusion. Test these embeddings to ensure compatibility and evaluate their effect on subject-driven image editing.
-
-Testing: Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks.
-
-### Next Steps
-Finalize embedding compatibility between LLaMA-VID and BLIP-Diffusion.
-Benchmark model performance using both the DreamBooth and OpenImages datasets.
-Evaluate editing accuracy for spatial reasoning and subject identity preservation.
+#### 3. Testing: 
+Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks.
 
 ### Contributors
 - Mingjun Liu
