@@ -15,3 +15,20 @@ Install the required packages using pip:
 ```bash
 pip install datasets transformers torch torchvision
 ```
+
+### Running the Model
+Set Up BLIP-Diffusion: Ensure that the BLIP-Diffusion model is installed and configured. Run inference with a sample image and text prompt to observe initial editing results and identify failure cases.
+
+Alternative Embedding Model: Set up and integrate LLaMA-VID for generating embeddings compatible with BLIP-Diffusion. Test these embeddings to ensure compatibility and evaluate their effect on subject-driven image editing.
+
+Testing: Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks.
+
+### Next Steps
+Finalize embedding compatibility between LLaMA-VID and BLIP-Diffusion.
+Benchmark model performance using both the DreamBooth and OpenImages datasets.
+Evaluate editing accuracy for spatial reasoning and subject identity preservation.
+
+### Contributors
+Mingjun Liu
+Yen-Chi Cheng
+Sreenidhi Vijayaraghavan
