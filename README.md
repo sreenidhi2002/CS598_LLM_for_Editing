@@ -29,6 +29,6 @@ Benchmark model performance using both the DreamBooth and OpenImages datasets.
 Evaluate editing accuracy for spatial reasoning and subject identity preservation.
 
 ### Contributors
-Mingjun Liu
-Yen-Chi Cheng
-Sreenidhi Vijayaraghavan
+- Mingjun Liu
+- Yen-Chi Cheng
+- Sreenidhi Vijayaraghavan
