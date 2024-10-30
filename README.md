@@ -17,12 +17,24 @@ cd CS598_LLM_for_Editing
 
 #### 2. Setup instructions for each model:
 
-- LLaMA-VID: The code for LLaMA-VID is available in the llama_vid directory. Ensure all necessary model weights and configurations are downloaded or set up as specified in the directory’s README or configuration files.
+- LLaVA-VID: The code for LLaMA-VID is available in the llama_vid directory. In order to access the directory for LLAVA-VID, use the following code:
+```
+cd LAVIS
+source setup_env_lavis.sh
+```
 
 - BLIP-Diffusion: The BLIP-Diffusion code is located in the blip_diffusion directory. The additional setup steps are listed within this directory to ensure the model can run correctly.
+```
+cd LAVIS
+source setup_env_lavis.sh
+```
 
 #### 3. Testing: 
-Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks.
+Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks. The code for the evaluation can be accessed through the Evaluation folder as shown here:
+```
+cd Evaluation
+python clip_score_evaluation.py
+```
 
 ### Contributors
 - Mingjun Liu
