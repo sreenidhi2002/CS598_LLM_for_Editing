@@ -30,7 +30,7 @@ source setup_env_lavis.sh
 
 Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks. The data loaders can be found under the "Dataloaders" directory and can be accessed as follows:
 ```
-cd LAVIS
+cd Dataloaders
 ```
 
 #### 3. Testing: 
