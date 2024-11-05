@@ -26,6 +26,9 @@ cd LLaMA-VID
 ```
 cd LAVIS
 source setup_env_lavis.sh
+
+pip install ftfy regex tqdm
+pip install git+https://github.com/openai/CLIP.git
 ```
 
 Use the DataLoaders to input images from both datasets and test the model’s performance on subject-driven editing tasks. The data loaders can be found under the "Dataloaders" directory and can be accessed as follows:
@@ -37,7 +40,7 @@ cd dataloaders
 The code for the evaluation can be accessed through the Evaluation folder as shown here:
 ```
 cd Evaluation
-python clip_score_evaluation.py
+python clip_score_evaluation.py --input_file ../outputs.txt --output_file clip_out.txt
 ```
 
 ### Contributors

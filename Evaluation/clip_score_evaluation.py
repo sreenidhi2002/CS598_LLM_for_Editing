@@ -30,7 +30,8 @@ def main(args):
     texts = []
     with open(args.input_file, "r") as f:
         for line in f:
-            image_path, text = line.strip().split("\t")
+                # image_path, text = line.strip().split("\t")
+            image_path, text = line.strip().split(" ")
             image_paths.append(image_path)
             texts.append(text)
 
@@ -42,9 +43,11 @@ def main(args):
         score = calculate_clip_score(image_path, text, model, preprocess, device)
         clip_scores.append((image_path, text, score))
 
+    mean_score = sum(score for _, _, score in clip_scores) / len(clip_scores)
     with open(args.output_file, "w") as f:
-        for image_path, text, score in clip_scores:
-            f.write(f"{image_path}\t{text}\t{score:.4f}\n")
+        # for image_path, text, score in clip_scores:
+            # f.write(f"{image_path}\t{text}\t{score:.4f}\n")
+        f.write(f"{mean_score:.4f}\n")
 
     print(f"Evaluation completed. Results saved to '{args.output_file}'.")
 
