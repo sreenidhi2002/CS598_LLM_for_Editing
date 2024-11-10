@@ -1,46 +1,40 @@
 import torch
-import torchvision.transforms as transforms
+from torchvision import transforms
 from PIL import Image
-from torchvision import models
+from transformers import ViTModel, ViTConfig
+from tqdm import tqdm
 
-# Load a pre-trained vision model (e.g., ResNet50)
-model = models.resnet50(pretrained=True)
-model = model.eval()  # Set to evaluation mode
+# Set the device to CPU (or change to "mps" if available on an M1 Mac)
+device = torch.device("mps") if torch.has_mps else torch.device("cpu")
 
-# Remove the classification layer to get the embedding
-model = torch.nn.Sequential(*list(model.children())[:-1])
+# Paths
+model_path = "../model_zoo/LAVIS/eva_vit_g.pth"
+image_path = "../../outputs/blip-backpack_on_the_floor.png"
 
-# Check if MPS is available for Apple Silicon
-if torch.backends.mps.is_available():
-    device = torch.device("mps")
-else:
-    device = torch.device("cpu")
-
-model.to(device)
-
-# Define image transformations to match the model's expected input
+# Define image transformations
 transform = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
+    transforms.Resize((336, 336)),  
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # ImageNet normalization
 ])
 
-# Function to extract embeddings from an image
-def extract_embedding(image_path):
-    # Load and transform the image
-    image = Image.open(image_path).convert('RGB')
-    input_tensor = transform(image).unsqueeze(0).to(device)
+image = Image.open(image_path).convert("RGB")
+image_tensor = transform(image).unsqueeze(0).to(device)  # Add batch dimension
 
-    # Get the embedding
-    with torch.no_grad():
-        embedding = model(input_tensor)
-    embedding = embedding.squeeze().cpu().numpy()
+# Load a ViT model configuration similar to EVA-G
+config = ViTConfig(hidden_size=768, num_hidden_layers=12, num_attention_heads=12, image_size=336, patch_size=16)
+model = ViTModel(config).to(device)
 
-    return embedding
+# Load the EVA-G weights
+state_dict = torch.load(model_path, map_location=device)
+model.load_state_dict(state_dict, strict=False)  # Use strict=False to ignore mismatches
 
-# Example usage
-image_path = "path/to/your/image.jpg"
-embedding = extract_embedding(image_path)
-print("Embedding shape:", embedding.shape)  # Should be (2048,) for ResNet50
-print("Embedding:", embedding)
+# Extract embeddings
+with torch.no_grad():
+    print("Extracting image embeddings using EVA-G...")
+    outputs = model(pixel_values=image_tensor)
+    embeddings = outputs.last_hidden_state
+
+# Display the shape and content of the embeddings
+print("Image Embeddings Shape:", embeddings.shape)
+print("Image Embeddings:", embeddings)
