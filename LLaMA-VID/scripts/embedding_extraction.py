@@ -8,6 +8,7 @@ from tqdm import tqdm
 device = torch.device("mps") if torch.has_mps else torch.device("cpu")
 
 # Paths
+# link for model weights: https://drive.google.com/file/d/1TkYFParUTx_yW-HPvSINFVCDsU9ZrLsR/view?usp=drive_link
 model_path = "../model_zoo/LAVIS/eva_vit_g.pth"
 image_path = "../../outputs/blip-backpack_on_the_floor.png"
 
